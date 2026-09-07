@@ -23,7 +23,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Address } from "@/sanity.types";
-import { client } from "@/sanity/lib/client";
+import { getAddressesLocal } from "@/data/local";
 import { urlFor } from "@/sanity/lib/image";
 import useStore from "@/store";
 import { useAuth, useUser } from "@clerk/nextjs";
@@ -51,14 +51,13 @@ const CartPage = () => {
   const fetchAddresses = async () => {
     setLoading(true);
     try {
-      const query = `*[_type=="address"] | order(publishedAt desc)`;
-      const data = await client.fetch(query);
+      const data = getAddressesLocal() as Address[];
       setAddresses(data);
-      const defaultAddress = data.find((addr: Address) => addr.default);
+      const defaultAddress = data.find((addr) => addr.default);
       if (defaultAddress) {
         setSelectedAddress(defaultAddress);
       } else if (data.length > 0) {
-        setSelectedAddress(data[0]); // Optional: select first address if no default
+        setSelectedAddress(data[0]);
       }
     } catch (error) {
       console.log("Addresses fetching error:", error);

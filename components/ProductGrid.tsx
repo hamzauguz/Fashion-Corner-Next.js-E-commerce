@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { motion, AnimatePresence } from "motion/react";
-import { client } from "@/sanity/lib/client";
+import { filterProductsLocal } from "@/data/local";
 import NoProductAvailable from "./NoProductAvailable";
 import { Loader2 } from "lucide-react";
 import Container from "./Container";
@@ -15,17 +15,15 @@ const ProductGrid = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState(productType[0]?.title || "");
-  const query = `*[_type == "product" && variant == $variant] | order(name asc){
-  ...,"categories": categories[]->title
-}`;
-  const params = { variant: selectedTab.toLowerCase() };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await client.fetch(query, params);
-        setProducts(await response);
+        const selected = productType.find((item) => item.title === selectedTab);
+        const variant = selected?.value || selectedTab.toLowerCase();
+        const response = filterProductsLocal({ variant });
+        setProducts(response as unknown as Product[]);
       } catch (error) {
         console.log("Product fetching Error", error);
       } finally {

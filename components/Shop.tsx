@@ -7,7 +7,7 @@ import CategoryList from "./shop/CategoryList";
 import { useSearchParams } from "next/navigation";
 import BrandList from "./shop/BrandList";
 import PriceList from "./shop/PriceList";
-import { client } from "@/sanity/lib/client";
+import { filterProductsLocal } from "@/data/local";
 import { Loader2 } from "lucide-react";
 import NoProductAvailable from "./NoProductAvailable";
 import ProductCard from "./ProductCard";
@@ -39,22 +39,13 @@ const Shop = ({ categories, brands }: Props) => {
         minPrice = min;
         maxPrice = max;
       }
-      const query = `
-      *[_type == 'product' 
-        && (!defined($selectedCategory) || references(*[_type == "category" && slug.current == $selectedCategory]._id))
-        && (!defined($selectedBrand) || references(*[_type == "brand" && slug.current == $selectedBrand]._id))
-        && price >= $minPrice && price <= $maxPrice
-      ] 
-      | order(name asc) {
-        ...,"categories": categories[]->title
-      }
-    `;
-      const data = await client.fetch(
-        query,
-        { selectedCategory, selectedBrand, minPrice, maxPrice },
-        { next: { revalidate: 0 } }
-      );
-      setProducts(data);
+      const data = filterProductsLocal({
+        categorySlug: selectedCategory,
+        brandSlug: selectedBrand,
+        minPrice,
+        maxPrice,
+      });
+      setProducts(data as unknown as Product[]);
     } catch (error) {
       console.log("Shop product fetching Error", error);
     } finally {

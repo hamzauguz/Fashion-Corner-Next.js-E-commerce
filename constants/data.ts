@@ -23,8 +23,10 @@ export const categoriesData = [
   { title: "gadget accessories", href: "gadget-accessories" },
 ];
 export const productType = [
-  { title: "Gadget", value: "gadget" },
-  { title: "Appliances", value: "appliances" },
-  { title: "Refrigerators", value: "refrigerators" },
-  { title: "Others", value: "others" },
+  { title: "Tops", value: "tops" },
+  { title: "Bottoms", value: "bottoms" },
+  { title: "Dresses", value: "dresses" },
+  { title: "Outerwear", value: "outerwear" },
+  { title: "Shoes", value: "shoes" },
+  { title: "Accessories", value: "accessories" },
 ];
