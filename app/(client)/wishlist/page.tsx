@@ -4,7 +4,11 @@ import { currentUser } from "@clerk/nextjs/server";
 import React from "react";
 
 const WishListPage = async () => {
-  const user = await currentUser();
+  const clerkEnabled = Boolean(
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+      process.env.CLERK_PUBLISHABLE_KEY
+  );
+  const user = clerkEnabled ? await currentUser() : null;
   return (
     <>
       {user ? (

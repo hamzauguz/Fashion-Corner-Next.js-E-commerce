@@ -5,10 +5,10 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - Shopcart online store",
-    default: "Shopcart online store",
+    template: "%s - Fashion Corner",
+    default: "Fashion Corner",
   },
-  description: "Shopcart online store, Your one stop shop for all your needs",
+  description: "Fashion Corner online store — clothing, shoes, and accessories",
 };
 
 export default function RootLayout({
@@ -16,13 +16,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <ClerkProvider>
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </div>
-    </ClerkProvider>
+  const publishableKey =
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+    process.env.CLERK_PUBLISHABLE_KEY;
+  const content = (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </div>
   );
+
+  if (!publishableKey) {
+    return content;
+  }
+
+  return <ClerkProvider publishableKey={publishableKey}>{content}</ClerkProvider>;
 }

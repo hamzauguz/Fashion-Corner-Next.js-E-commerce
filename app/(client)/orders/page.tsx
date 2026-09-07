@@ -12,6 +12,14 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 const OrdersPage = async () => {
+  const clerkEnabled = Boolean(
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+      process.env.CLERK_PUBLISHABLE_KEY
+  );
+  if (!clerkEnabled) {
+    return redirect("/");
+  }
+
   const { userId } = await auth();
   if (!userId) {
     return redirect("/");
