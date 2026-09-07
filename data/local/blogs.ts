@@ -4,6 +4,18 @@ const meta = {
   _rev: "local",
 };
 
+function cover(title: string) {
+  const params = new URLSearchParams({
+    title,
+    variant: "blog",
+    label: "journal",
+  });
+  return {
+    _type: "image" as const,
+    url: `/api/product-image?${params.toString()}`,
+  };
+}
+
 function block(text: string, key: string) {
   return {
     _type: "block" as const,
@@ -49,16 +61,10 @@ export const blogs = [
     slug: { _type: "slug" as const, current: "capsule-wardrobe" },
     publishedAt: "2026-02-10T10:00:00Z",
     isLatest: true,
-    mainImage: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1200&q=80",
-    },
+    mainImage: cover("Capsule Wardrobe"),
     author: {
       name: "Maya Chen",
-      image: {
-        _type: "image" as const,
-        url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
-      },
+      image: cover("Maya Chen"),
     },
     blogcategories: [{ title: "Style Tips" }],
     body: [
@@ -80,16 +86,10 @@ export const blogs = [
     slug: { _type: "slug" as const, current: "layering-guide" },
     publishedAt: "2026-02-18T10:00:00Z",
     isLatest: true,
-    mainImage: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=1200&q=80",
-    },
+    mainImage: cover("Layering Guide"),
     author: {
       name: "Jordan Hale",
-      image: {
-        _type: "image" as const,
-        url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
-      },
+      image: cover("Jordan Hale"),
     },
     blogcategories: [{ title: "Trends" }],
     body: [
@@ -111,16 +111,10 @@ export const blogs = [
     slug: { _type: "slug" as const, current: "shoe-care" },
     publishedAt: "2026-03-01T10:00:00Z",
     isLatest: true,
-    mainImage: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&q=80",
-    },
+    mainImage: cover("Shoe Care"),
     author: {
       name: "Maya Chen",
-      image: {
-        _type: "image" as const,
-        url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
-      },
+      image: cover("Maya Chen"),
     },
     blogcategories: [{ title: "Style Tips" }],
     body: [

@@ -55,6 +55,7 @@ const ShopByBrands = async () => {
                 alt="brandImage"
                 width={250}
                 height={250}
+                unoptimized
                 className="w-32 h-20 object-contain"
               />
             )}

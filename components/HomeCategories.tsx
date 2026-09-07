@@ -23,6 +23,7 @@ const HomeCategories = ({ categories }: { categories: Category[] }) => {
                     alt="categoryImage"
                     width={500}
                     height={500}
+                    unoptimized
                     className="w-full h-full object-contain group-hover:scale-110 hoverEffect"
                   />
                 </Link>

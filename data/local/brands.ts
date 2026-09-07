@@ -4,6 +4,18 @@ const meta = {
   _rev: "local",
 };
 
+function cover(title: string) {
+  const params = new URLSearchParams({
+    title,
+    variant: "brand",
+    label: "brand",
+  });
+  return {
+    _type: "image" as const,
+    url: `/api/product-image?${params.toString()}`,
+  };
+}
+
 export const brands = [
   {
     _id: "brand-aura",
@@ -12,10 +24,7 @@ export const brands = [
     title: "Aura",
     slug: { _type: "slug" as const, current: "aura" },
     description: "Minimal everyday fashion",
-    image: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80",
-    },
+    image: cover("Aura"),
   },
   {
     _id: "brand-nordic-thread",
@@ -24,10 +33,7 @@ export const brands = [
     title: "Nordic Thread",
     slug: { _type: "slug" as const, current: "nordic-thread" },
     description: "Clean Scandinavian-inspired clothing",
-    image: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80",
-    },
+    image: cover("Nordic Thread"),
   },
   {
     _id: "brand-lumen",
@@ -36,9 +42,6 @@ export const brands = [
     title: "Lumen",
     slug: { _type: "slug" as const, current: "lumen" },
     description: "Streetwear with soft luxury details",
-    image: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80",
-    },
+    image: cover("Lumen"),
   },
 ];

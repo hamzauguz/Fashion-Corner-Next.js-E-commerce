@@ -131,6 +131,7 @@ const CartPage = () => {
                                   width={500}
                                   height={500}
                                   loading="lazy"
+                                  unoptimized
                                   className="w-32 md:w-40 h-32 md:h-40 object-cover group-hover:scale-105 hoverEffect"
                                 />
                               </Link>

@@ -4,6 +4,14 @@ const meta = {
   _rev: "local",
 };
 
+function cover(title: string, variant: string) {
+  const params = new URLSearchParams({ title, variant, label: variant });
+  return {
+    _type: "image" as const,
+    url: `/api/product-image?${params.toString()}`,
+  };
+}
+
 export const categories = [
   {
     _id: "category-women",
@@ -12,12 +20,9 @@ export const categories = [
     title: "Women",
     slug: { _type: "slug" as const, current: "women" },
     description: "Dresses, tops, and essentials for women",
-    range: 29,
+    range: 28,
     featured: true,
-    image: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80",
-    },
+    image: cover("Women", "category"),
   },
   {
     _id: "category-men",
@@ -26,12 +31,9 @@ export const categories = [
     title: "Men",
     slug: { _type: "slug" as const, current: "men" },
     description: "Casual and smart styles for men",
-    range: 35,
+    range: 32,
     featured: true,
-    image: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?auto=format&fit=crop&w=800&q=80",
-    },
+    image: cover("Men", "category"),
   },
   {
     _id: "category-shoes",
@@ -40,12 +42,9 @@ export const categories = [
     title: "Shoes",
     slug: { _type: "slug" as const, current: "shoes" },
     description: "Sneakers, boots, and everyday footwear",
-    range: 49,
+    range: 55,
     featured: true,
-    image: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80",
-    },
+    image: cover("Shoes", "shoes"),
   },
   {
     _id: "category-accessories",
@@ -54,11 +53,8 @@ export const categories = [
     title: "Accessories",
     slug: { _type: "slug" as const, current: "accessories" },
     description: "Bags, hats, and finishing touches",
-    range: 19,
+    range: 28,
     featured: false,
-    image: {
-      _type: "image" as const,
-      url: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=800&q=80",
-    },
+    image: cover("Accessories", "accessories"),
   },
 ];

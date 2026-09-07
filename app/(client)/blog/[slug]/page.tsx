@@ -34,6 +34,7 @@ const SingleBlogPage = async ({
               alt={blog.title || "Blog Image"}
               width={800}
               height={800}
+              unoptimized
               className="w-full max-h-[500px] object-cover rounded-lg"
             />
           )}
@@ -226,6 +227,7 @@ const BlogLeft = async ({ slug }: { slug: string }) => {
                   alt="blogImage"
                   width={100}
                   height={100}
+                  unoptimized
                   className="w-16 h-16 rounded-full object-cover border-[1px] border-shop_dark_green/10 group-hover:border-shop_dark_green hoverEffect"
                 />
               )}
