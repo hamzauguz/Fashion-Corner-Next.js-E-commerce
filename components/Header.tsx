@@ -13,12 +13,23 @@ import Link from "next/link";
 import { Logs } from "lucide-react";
 import { getMyOrders } from "@/sanity/queries";
 
+const clerkEnabled = Boolean(
+  process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+    process.env.CLERK_PUBLISHABLE_KEY
+);
+
 const Header = async () => {
-  const user = await currentUser();
-  const { userId } = await auth();
+  let user = null;
+  let userId: string | null = null;
   let orders = null;
-  if (userId) {
-    orders = await getMyOrders(userId);
+
+  if (clerkEnabled) {
+    user = await currentUser();
+    const authState = await auth();
+    userId = authState.userId;
+    if (userId) {
+      orders = await getMyOrders(userId);
+    }
   }
 
   return (
@@ -46,12 +57,14 @@ const Header = async () => {
             </Link>
           )}
 
-          <ClerkLoaded>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            {!user && <SignIn />}
-          </ClerkLoaded>
+          {clerkEnabled ? (
+            <ClerkLoaded>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+              {!user && <SignIn />}
+            </ClerkLoaded>
+          ) : null}
         </div>
       </Container>
     </header>
