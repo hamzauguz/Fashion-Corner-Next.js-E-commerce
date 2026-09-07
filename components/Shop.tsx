@@ -29,7 +29,8 @@ const Shop = ({ categories, brands }: Props) => {
     brandParams || null
   );
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
-  const fetchProducts = async () => {
+
+  useEffect(() => {
     setLoading(true);
     try {
       let minPrice = 0;
@@ -51,10 +52,6 @@ const Shop = ({ categories, brands }: Props) => {
     } finally {
       setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchProducts();
   }, [selectedCategory, selectedBrand, selectedPrice]);
   return (
     <div className="border-t">
