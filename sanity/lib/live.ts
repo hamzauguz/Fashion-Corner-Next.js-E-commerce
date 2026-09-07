@@ -1,19 +1,11 @@
-// Querying with "sanityFetch" will keep content automatically updated
-// Before using it, import and render "<SanityLive />" in your layout, see
-// https://github.com/sanity-io/next-sanity#live-content-api for more information.
-import { defineLive } from "next-sanity";
-import { client } from "./client";
+/**
+ * Local MVP: Sanity Live is disabled. Query layer uses data/local instead.
+ */
+export const sanityFetch = async <T = unknown>(_options: {
+  query: string;
+  params?: Record<string, unknown>;
+}): Promise<{ data: T }> => {
+  return { data: [] as T };
+};
 
-const token = process.env.SANITY_API_READ_TOKEN;
-if (!token) {
-  throw new Error("SANITY_API_READ_TOKEN is not set");
-}
-
-export const { sanityFetch, SanityLive } = defineLive({
-  client,
-  serverToken: token,
-  browserToken: token,
-  fetchOptions: {
-    revalidate: 0,
-  },
-});
+export const SanityLive = () => null;

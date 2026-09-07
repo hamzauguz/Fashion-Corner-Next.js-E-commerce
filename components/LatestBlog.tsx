@@ -22,6 +22,7 @@ const LatestBlog = async () => {
                   alt="blogImage"
                   width={500}
                   height={500}
+                  unoptimized
                   className="w-full max-h-80 object-cover"
                 />
               </Link>

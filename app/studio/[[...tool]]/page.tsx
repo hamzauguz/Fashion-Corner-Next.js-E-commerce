@@ -1,19 +1,18 @@
-/**
- * This route is responsible for the built-in authoring environment using Sanity Studio.
- * All routes under your studio path is handled by this file using Next.js' catch-all routes:
- * https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes
- *
- * You can learn more about the next-sanity package here:
- * https://github.com/sanity-io/next-sanity
- */
+import Link from "next/link";
 
-import { NextStudio } from 'next-sanity/studio'
-import config from '../../../sanity.config'
-
-export const dynamic = 'force-static'
-
-export { metadata, viewport } from 'next-sanity/studio'
+export const dynamic = "force-static";
 
 export default function StudioPage() {
-  return <NextStudio config={config} />
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center gap-4 p-8 text-center">
+      <h1 className="text-2xl font-semibold">Studio disabled</h1>
+      <p className="text-gray-600 max-w-md">
+        This demo uses local product data instead of Sanity CMS. Edit fixtures
+        in <code className="text-sm bg-gray-100 px-1 rounded">data/local</code>.
+      </p>
+      <Link href="/" className="text-shop_dark_green underline font-medium">
+        Back to store
+      </Link>
+    </main>
+  );
 }

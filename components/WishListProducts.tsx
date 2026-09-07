@@ -72,6 +72,7 @@ const WishListProducts = () => {
                               alt={"product image"}
                               width={80}
                               height={80}
+                              unoptimized
                               className="rounded-md group-hover:scale-105 hoverEffect h-20 w-20 object-contain"
                             />
                           </Link>

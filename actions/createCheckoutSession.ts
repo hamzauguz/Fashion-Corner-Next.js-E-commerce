@@ -24,6 +24,9 @@ export async function createCheckoutSession(
   metadata: Metadata
 ) {
   try {
+    if (!process.env.STRIPE_SECRET_KEY || !stripe) {
+      throw new Error("Stripe is not configured for this local demo");
+    }
     // Retrieve existing customer or create a new one
     const customers = await stripe.customers.list({
       email: metadata.customerEmail,
